@@ -1,0 +1,40 @@
+
+In this repository,the Python code that receives the camera image could be streaming or just a single frame 
+of a turtlebot3 waffle and turns the robot to detect and follow the ball. in the gazebo world , we just have a red ball
+as the tb3 revolves around itself looking for the object and as sson as it is found the robot will drive to the object .
+
+
+roscore
+
+
+in the case roscore dont launch change the ip address in the bashrc file to ip address of computer in this example ,>nano ~/.bashrc:
+export ROS_MASTER_URI=http://192.168.2.215:11311
+
+export ROS_HOSTNAME=192.168.2.215
+(depending on the ip adress of the ROS_MASTER_URI at the moment)
+
+source ~/.bashrc
+
+
+
+
+First the world must be created in gazebo using the dimensions given in the experiment document
+new terminal:export TURTLEBOT3_MODEL=waffle_pi
+The gazebo world must be launched using the launch file: roslaunch turtlebot3_manipulation_gazebo.launch located in ~/catkin_ws/src/turtlebot3_manipulation_simulations/turtlebot3_manipulation_gazebo/launch
+
+
+The play button must be pressed in gazebo for the packages to work as intended
+
+ new terminal: export TURTLEBOT3_MODEL=waffle_pi    >> roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+
+make your map or use launch file to have a map made 
+
+Step 2 : add a gray ball change the color ( tune all the rgb , ball is better when the color is very bright ), to create the objet get the brightessssss
+
+Step 3: launch the script for either script , the ball follow or ball tracking 
+
+
+
+
+now for real world 
+
