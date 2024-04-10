@@ -1,0 +1,67 @@
+##############steps to import file in gaebo############
+
+> download blender :sudo apt install blender
+
+> download your stl file ( 3d model) and place in a location of your choosing 
+> go in blender , import your file in there fix the center coordinates to match them the world and your part and export it as dae file
+
+> go in the .gazebo/models/ and :mkdir <name of ur directory> cd in there and mkdir meshes
+>in terminal : cp <name of file>.dae ../.gazebo/models/<name of where the directory>/meshes 
+
+>do the same for the model.config and model.sdf
+
+
+example of model.config :
+<?xml version="1.0" ?>
+<model>
+    <name>TShapev1</name>
+    <version>1.0</version>
+    <sdf version="1.6">model.sdf</sdf>
+    <author>
+        <name>Michel Akpro</name>
+        <email>akpr0001@algonquinlive.com</email>
+    </author>
+    <description></description>
+</model>
+
+>edit the name of the part and your email, if you have a different name for sdf file , replace the 5th line but the name you want 
+
+
+
+
+
+>example of model.sdf:
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="my_model">
+    <static>false</static> <!-- Set to true if the model is not supposed to move -->
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <!-- Path to your STL file -->
+            <uri>model://my_model/meshes/TShapev1.stl</uri>
+            <!-- Scale of the model -->
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <!-- Path to your STL file -->
+            <uri>model://my_model/meshes/TShapev1.stl</uri>
+            <!-- Scale of the model -->
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
+
+
+edit this line :<uri>model://my_model/meshes/TShapev1.stl</uri> by changing the location  basically just the name of you part.
+
+
+once they all in there it gonna work .

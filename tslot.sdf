@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="my_model">
+    <static>false</static> <!-- Set to true if the model is not supposed to move -->
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <!-- Path to your STL file -->
+            <uri>model://Mich/T-Shapev1.stl</uri>
+            <!-- Scale of the model -->
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <!-- Path to your STL file -->
+            <uri>model://Mich/T-Shapev1.stl</uri>
+            <!-- Scale of the model -->
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

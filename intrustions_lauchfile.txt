@@ -1,0 +1,55 @@
+step1 :
+go  inside of src of catkinws ( home/ catkinws/src)
+
+step2:
+make a package in the directory  with is line: catkin_create_pkg my_package_name rospy
+,call your package whatever you want by replacing the my_packege name but ypur custom name .
+
+> in there make a directory called launch : mkdir launch and go in launch
+step3:
+In the directory showned above call this : touch my_world.launch > then code my_world.launch :to create the launch file 
+edit the launch file by adding these line :
+<launch>
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [waffle, waffle_pi]"/>
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <rosparam file="$(find turtlebot3_manipulation_gazebo)/config/gazebo_controller.yaml" command="load"/>
+
+  
+  
+
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- set world to custom world -->
+    <arg name="world_name" value="$(find open_manipulator_gazebo)/worlds/Experiment.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <!-- send robot urdf to param server -->
+  <include file="$(find turtlebot3_manipulation_description)/launch/turtlebot3_manipulation_upload.launch">
+    <arg name="model" value="$(arg model)"/>
+  </include>
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -param robot_description -model robot -x 2.0 -y -3.5 -Y 0.0 -J joint1 0.0 -J joint2 0.0 -J joint3 0.0 -J joint4 0.0 -J gripper 0.0 -J gripper_sub 0.0"/>
+
+  <!-- controller utils -->
+  <include file="$(find turtlebot3_manipulation_gazebo)/launch/controller_utils.launch"/>
+
+  <!-- run controllers -->
+  <include file="$(find turtlebot3_manipulation_gazebo)/launch/turtlebot3_manipulation_controller.launch"/>
+
+</launch>
+
+
+
+step4: In this launh file change the parameter of the line that says custom world,
+so that the find ...... line would match the package name so in the in case replace open_manipulator_gazebo
+by the package created .now just add the directory from there as the followwing lines shows .
+
+step5 : launch anyfile u want like this roslaunch my_package_name my_world.launch( replace the my_package_name by the package name )
